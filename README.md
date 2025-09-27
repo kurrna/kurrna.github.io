@@ -1,1 +1,1 @@
-# kurna.github.io
+# Kurna.github.io
