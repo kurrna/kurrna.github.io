@@ -5,6 +5,11 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -32,7 +37,9 @@ jobs:
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Use a Personal Access Token (PAT) stored in repo secret `DEPLOY_TOKEN`.
+          # Create a PAT with `repo` scope and add it to Settings → Secrets → Actions → DEPLOY_TOKEN.
+          personal_token: ${{ secrets.DEPLOY_TOKEN }}
           publish_dir: ./dist
           publish_branch: gh-pages
           # keep files in gh-pages branch (set to true if you want to force overwrite)
