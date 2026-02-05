@@ -11,7 +11,7 @@ export const Experience: React.FC = () => {
         {/* Experience Column */}
         <div className="lg:col-span-7">
           <h2 className="text-3xl font-bold text-textMain mb-8 flex items-center gap-2">
-            <Icons.Briefcase className="text-primary" /> 工作经历
+            <Icons.Briefcase className="text-primary" /> 教育经历
           </h2>
           
           <div className="space-y-8">

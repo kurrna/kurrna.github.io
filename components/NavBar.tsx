@@ -58,7 +58,6 @@ export const NavBar: React.FC = () => {
   const navItems = [
     { id: SectionId.HOME, label: '首页' },
     { id: SectionId.PROJECTS, label: '项目' },
-    { id: SectionId.RESUME, label: '简历' },
     { id: SectionId.BLOG, label: '博客' },
   ];
 
@@ -75,6 +74,15 @@ export const NavBar: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-6">
+          {/* Resume CTA */}
+          <a
+            href={PROFILE.resume}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:inline-block px-4 py-2 bg-primary text-white rounded-full font-medium hover:bg-primaryHover transition-colors"
+          >
+            简历
+          </a>
           {/* Desktop Nav */}
           <div className="hidden md:flex gap-8">
             {navItems.map((item) => (

@@ -12,30 +12,30 @@ export const Blog: React.FC = () => {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {POSTS.map((post) => (
-            <article 
-              key={post.id} 
-              className="group flex flex-col bg-transparent border-t border-border pt-8 hover:border-primary transition-colors cursor-pointer"
-            >
-              <div className="flex items-center gap-3 text-xs font-medium text-textMuted mb-3">
-                <span className="text-primary">{post.category}</span>
-                <span>•</span>
-                <span>{post.date}</span>
-              </div>
-              
-              <h3 className="text-xl font-bold text-textMain mb-3 group-hover:text-primary transition-colors">
-                {post.title}
-              </h3>
-              
-              <p className="text-textMuted text-sm leading-relaxed mb-4 line-clamp-3">
-                {post.excerpt}
-              </p>
-              
-              <div className="mt-auto flex items-center text-sm font-medium text-textMain group-hover:translate-x-1 transition-transform">
-                阅读文章 <Icons.ArrowRight size={14} className="ml-1" />
-              </div>
-            </article>
-          ))}
+          {POSTS.map((post) => {
+            const href = post.link || '#';
+            return (
+              <a
+                key={post.id}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block bg-transparent border-t border-border pt-8 hover:border-primary transition-colors"
+              >
+                <div className="flex items-center gap-3 text-xs font-medium text-textMuted mb-3">
+                  <span>{post.date}</span>
+                </div>
+
+                <h3 className="text-xl font-bold text-textMain mb-3 group-hover:text-primary transition-colors">
+                  {post.title}
+                </h3>
+
+                <div className="mt-auto flex items-center text-sm font-medium text-textMain group-hover:translate-x-1 transition-transform">
+                  查看文档 <Icons.ArrowRight size={14} className="ml-1" />
+                </div>
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>

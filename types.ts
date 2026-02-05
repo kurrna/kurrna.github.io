@@ -4,17 +4,15 @@ export interface Project {
   description: string;
   tags: string[];
   link: string;
-  stars: number;
   featured?: boolean;
 }
 
 export interface Post {
   id: string;
   title: string;
-  excerpt: string;
   date: string;
-  readTime: string;
-  category: string;
+  // 外部链接或 public/ 下的文件路径，例如 '/blogs/doc.pdf'
+  link?: string;
 }
 
 export interface Experience {

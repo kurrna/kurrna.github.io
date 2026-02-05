@@ -9,8 +9,7 @@ export const Footer: React.FC = () => {
           © {new Date().getFullYear()} {PROFILE.name}. 保留所有权利.
         </div>
         <div className="text-textMuted text-sm flex gap-6">
-          <a href="#" className="hover:text-textMain transition-colors">隐私政策</a>
-          <a href="#" className="hover:text-textMain transition-colors">联系方式</a>
+          <a href={`mailto:${PROFILE.email}`} className="hover:text-textMain transition-colors">联系方式</a>
         </div>
       </div>
     </footer>
