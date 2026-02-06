@@ -6,7 +6,7 @@ on:
       - main
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -34,13 +34,13 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Configure Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact for Pages
+        uses: actions/upload-pages-artifact@v1
         with:
-          # Use a Personal Access Token (PAT) stored in repo secret `DEPLOY_TOKEN`.
-          # Create a PAT with `repo` scope and add it to Settings → Secrets → Actions → DEPLOY_TOKEN.
-          personal_token: ${{ secrets.DEPLOY_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: gh-pages
-          # keep files in gh-pages branch (set to true if you want to force overwrite)
-          force_orphan: false
+          path: ./dist
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
