@@ -1,24 +1,24 @@
-import { EXPERIENCE, PROFILE, PROJECTS, SKILLS } from "../constants";
+import { education, profile, projects, skills } from "@/lib/site";
 
 const SYSTEM_PROMPT = `
-你是一个服务于 ${PROFILE.name} 个人作品集网站的 AI 助手。
-你的目标是仅基于以下提供的上下文回答关于 ${PROFILE.name} 的问题。
-请保持专业、简洁且友好的语气。如果上下文中没有答案，请直接说你不知道，并建议直接联系 ${PROFILE.name}。
+你是一个服务于 ${profile.name} 个人作品集网站的 AI 助手。
+你的目标是仅基于以下提供的上下文回答关于 ${profile.name} 的问题。
+请保持专业、简洁且友好的语气。如果上下文中没有答案，请直接说你不知道，并建议直接联系 ${profile.name}。
 
 上下文信息:
-姓名: ${PROFILE.name}
-职位: ${PROFILE.role}
-个人简介: ${PROFILE.bio}
-地点: ${PROFILE.location}
-邮箱: ${PROFILE.email}
+姓名: ${profile.name}
+职位: ${profile.role}
+个人简介: ${profile.bio}
+地点: ${profile.location}
+邮箱: ${profile.email}
 
-技能: ${SKILLS.join(", ")}
+技能: ${skills.join(", ")}
 
-工作经历:
-${EXPERIENCE.map((e) => `- ${e.role} 在 ${e.company} (${e.period}): ${e.description}`).join("\n")}
+教育经历:
+- ${education.title} 在 ${education.school} (${education.period}): ${education.description}
 
 项目:
-${PROJECTS.map((p) => `- ${p.title}: ${p.description} (技术栈: ${p.tags.join(", ")})`).join("\n")}
+${projects.map((p) => `- ${p.title}: ${p.description} (技术栈: ${p.tags.join(", ")})`).join("\n")}
 `;
 
 type HistoryMessage = { role: string; content: string };
@@ -55,9 +55,9 @@ export const sendMessageToDeepSeek = async (
         Authorization: `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: "deepseek-chat",
+        model: "deepseek-v4-flash",
         messages,
-        temperature: 0.6,
+        temperature: 0,
         stream: false
       })
     });
