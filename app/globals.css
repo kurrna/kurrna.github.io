@@ -16,12 +16,11 @@
     cursor: pointer;
   }
   html {
-    @apply font-mono;
+    @apply font-sans;
   }
 }
 
-@layer components {
-  .markstream-react {
+.markstream-react {
     width: 100% !important;
     max-width: 100%;
     min-width: 0;
@@ -36,14 +35,44 @@
   .markstream-react pre {
     max-width: 100%;
     overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--muted);
+    padding: 1rem;
+    color: var(--foreground);
+    line-height: 1.6;
   }
-}
+
+  .markstream-react .table-node-wrapper {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .markstream-react table {
+    width: max-content;
+    min-width: 100%;
+    border-collapse: collapse;
+  }
+
+  .markstream-react :where(th, td) {
+    border: 1px solid var(--border);
+    padding: 0.625rem 0.75rem;
+    vertical-align: top;
+    text-align: left;
+  }
+
+  .markstream-react th {
+    background: var(--muted);
+    font-weight: 600;
+  }
 
 @theme inline {
 
-  --font-heading: var(--font-mono);
+  --font-heading: var(--font-geist-sans);
 
-  --font-mono: var(--font-mono);
+  --font-mono: var(--font-geist-mono);
+
+  --font-sans: var(--font-geist-sans);
 
   --color-sidebar-ring: var(--sidebar-ring);
 
