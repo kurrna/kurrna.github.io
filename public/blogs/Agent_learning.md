@@ -1,6 +1,6 @@
 ---
 title: Agent Learning
-description: Harness Engineering 和 Agent 工作流的一些学习笔记。
+description: Agent 学习的一些笔记，待整理。
 date: 2026-06-27
 category: 学习笔记
 ---
