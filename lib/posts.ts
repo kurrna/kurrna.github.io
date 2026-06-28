@@ -37,7 +37,7 @@ async function readPostMeta(file: string): Promise<BlogPost> {
   const description =
     meta.description ||
     lines.find((line) => line && !line.startsWith("#") && !line.startsWith("|") && !line.startsWith("-")) ||
-    "Markdown 笔记";
+    "Markdown 博客";
   const slug = path.basename(file, ".md").toLowerCase().replace(/\s+/g, "-");
 
   return {
