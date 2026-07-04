@@ -9,6 +9,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  actions: write
 
 jobs:
   build-and-deploy:
@@ -36,6 +37,22 @@ jobs:
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
+
+      - name: Clean up old artifacts (fix re-run duplicate artifact issue)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Delete any existing 'github-pages' artifact from previous attempts
+          # to avoid the "Multiple artifacts named github-pages" error on re-runs
+          artifacts_url="${{ github.api_url }}/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts"
+          echo "Checking for existing github-pages artifacts in run ${{ github.run_id }}..."
+          existing=$(curl -s -H "Authorization: Bearer $GH_TOKEN" "$artifacts_url" | \
+            jq -r '.artifacts[] | select(.name == "github-pages") | .id')
+          for id in $existing; do
+            echo "Deleting old artifact ID: $id"
+            curl -s -X DELETE -H "Authorization: Bearer $GH_TOKEN" \
+              "${{ github.api_url }}/repos/${{ github.repository }}/actions/artifacts/$id"
+          done
 
       - name: Upload artifact for Pages
         uses: actions/upload-pages-artifact@v3
