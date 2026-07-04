@@ -14,7 +14,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
   CardHeader,
@@ -59,7 +58,7 @@ export function HomePage({ posts }: { posts: HomePost[] }) {
   return (
     <div ref={rootRef} className="min-h-screen bg-background text-foreground">
       <Header />
-      <main>
+      <main id="main-content" tabIndex={-1} className="focus:outline-none">
         <Hero />
         <Projects />
         <Writing posts={posts} />
@@ -72,21 +71,24 @@ export function HomePage({ posts }: { posts: HomePost[] }) {
 function Header() {
   return (
     <header className="sticky top-0 z-50 border-b bg-background/90 backdrop-blur">
-      <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 md:px-6">
+      <nav
+        aria-label="主导航"
+        className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 md:px-6"
+      >
         <a
           href="#about"
-          className="font-heading text-lg font-semibold tracking-tight"
+          className="inline-flex min-h-11 items-center font-heading text-lg font-semibold tracking-tight"
         >
           Kurna
         </a>
         <div className="flex items-center gap-1">
-          <Button variant="ghost" size="sm" asChild>
+          <Button variant="ghost" size="sm" className="min-h-11" asChild>
             <a href="#projects">项目</a>
           </Button>
-          <Button variant="ghost" size="sm" asChild>
+          <Button variant="ghost" size="sm" className="min-h-11" asChild>
             <a href="#blog">博客</a>
           </Button>
-          <Button variant="ghost" size="sm" asChild>
+          <Button variant="ghost" size="sm" className="min-h-11" asChild>
             <a href={`mailto:${profile.email}`}>联系</a>
           </Button>
           <ThemeToggle />
@@ -132,36 +134,41 @@ function Hero() {
         </div>
 
         <div className="flex flex-col gap-5">
-          <h3
+          <h1
             data-reveal
             className="font-heading text-5xl font-bold leading-none tracking-tight sm:text-5xl md:text-6xl"
           >
             {profile.name}
-          </h3>
-          <a href="https://git.io/typing-svg">
-            <img
-              src={`https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=40&duration=1000&pause=1000&color=${typingSvgColor}&multiline=true&repeat=false&width=700&height=150&lines=Hi+there%F0%9F%91%8B;I%E2%80%99m+Kurna%F0%9F%90%BB;So+glad+to+meet+you+here!%F0%9F%98%BA`}
-              alt="Typing SVG"
-            />
-          </a>
+          </h1>
+          <img
+            src={`https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=40&duration=1000&pause=1000&color=${typingSvgColor}&multiline=true&repeat=false&width=700&height=150&lines=Hi+there%F0%9F%91%8B;I%E2%80%99m+Kurna%F0%9F%90%BB;So+glad+to+meet+you+here!%F0%9F%98%BA`}
+            alt="Hi there! I’m Kurna. So glad to meet you here!"
+            width={700}
+            height={150}
+          />
           <p
             data-reveal
             className="max-w-2xl text-xl leading-8 text-muted-foreground md:text-2xl"
           >
-            努力提升计算机水平与工程能力中…
+            努力提升计算机水平与工程能力中💪
           </p>
           {/*<p data-reveal className="max-w-xl text-lg leading-8 text-muted-foreground">
             {profile.bio}。
           </p>*/}
         </div>
         <div data-reveal className="flex flex-wrap gap-3">
-          <Button size="lg" className="min-w-36" asChild>
+          <Button size="lg" className="min-h-11 min-w-36" asChild>
             <a href={profile.github} target="_blank" rel="noreferrer">
               <GithubLogoIcon data-icon="inline-start" />
               GitHub
             </a>
           </Button>
-          <Button variant="outline" size="lg" className="min-w-36" asChild>
+          <Button
+            variant="outline"
+            size="lg"
+            className="min-h-11 min-w-36"
+            asChild
+          >
             <a href={profile.resume}>
               <FileTextIcon data-icon="inline-start" />
               简历
@@ -236,8 +243,8 @@ function Projects() {
       <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 md:px-6">
         <SectionHeading
           eyebrow="SELECTED WORK"
-          title="项目"
-          description="关于 Agent、后端与全栈开发的工程实践。"
+          title="项目经历"
+          description="Java 后端与 Agent 开发"
         />
 
         <div className="grid gap-4 lg:grid-cols-3">
@@ -248,37 +255,51 @@ function Projects() {
               className="h-full rounded-md bg-card shadow-none transition-colors hover:bg-accent"
             >
               <CardHeader>
-                <div className="mb-4 font-mono text-base text-muted-foreground">
-                  {String(index + 1).padStart(2, "0")}
-                </div>
-                <CardTitle className="text-xl">{project.title}</CardTitle>
-                <CardDescription className="leading-7">
-                  {project.description}
-                </CardDescription>
-                <CardAction className="flex gap-1">
-                  {project.site ? (
-                    <Button variant="ghost" size="icon-sm" asChild>
+                <div className="mb-4 flex items-center justify-between">
+                  <span className="font-mono text-base text-muted-foreground">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <div className="flex gap-1">
+                    {project.site ? (
+                      <Button
+                        variant="ghost"
+                        size="icon-sm"
+                        className="size-11"
+                        asChild
+                      >
+                        <a
+                          href={project.site}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={`${project.title} 网站`}
+                        >
+                          <GlobeHemisphereWestIcon />
+                        </a>
+                      </Button>
+                    ) : null}
+                    <Button
+                      variant="ghost"
+                      size="icon-sm"
+                      className="size-11"
+                      asChild
+                    >
                       <a
-                        href={project.site}
+                        href={project.href}
                         target="_blank"
                         rel="noreferrer"
-                        aria-label={`${project.title} 网站`}
+                        aria-label={`${project.title} GitHub`}
                       >
-                        <GlobeHemisphereWestIcon />
+                        <GithubLogoIcon />
                       </a>
                     </Button>
-                  ) : null}
-                  <Button variant="ghost" size="icon-sm" asChild>
-                    <a
-                      href={project.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label={`${project.title} GitHub`}
-                    >
-                      <GithubLogoIcon />
-                    </a>
-                  </Button>
-                </CardAction>
+                  </div>
+                </div>
+                <CardTitle asChild className="text-xl">
+                  <h3>{project.title}</h3>
+                </CardTitle>
+                <CardDescription className="leading-7 whitespace-pre-wrap">
+                  {project.description}
+                </CardDescription>
               </CardHeader>
               <CardContent className="mt-auto">
                 <p className="font-mono text-sm leading-6 text-muted-foreground">
@@ -314,7 +335,10 @@ function Writing({ posts }: { posts: HomePost[] }) {
             href={`/blog/${post.slug}`}
             className="group grid gap-3 border-b py-4 transition-colors hover:bg-muted/50 sm:grid-cols-[7rem_1fr_auto] sm:items-center sm:px-3"
           >
-            <time className="font-mono text-sm text-muted-foreground">
+            <time
+              dateTime={post.date}
+              className="font-mono text-sm text-muted-foreground"
+            >
               {post.date}
             </time>
             <div className="min-w-0">
@@ -326,7 +350,7 @@ function Writing({ posts }: { posts: HomePost[] }) {
             <ArrowRightIcon className="transition-transform group-hover:translate-x-1" />
           </a>
         ))}
-        <Button variant="ghost" className="mt-4 self-start" asChild>
+        <Button variant="ghost" className="mt-4 min-h-11 self-start" asChild>
           <a href="/blog">
             查看全部博客
             <ArrowRightIcon data-icon="inline-end" />
@@ -364,7 +388,13 @@ function Footer() {
     <footer className="border-t">
       <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-8 text-base text-muted-foreground sm:flex-row sm:items-center sm:justify-between md:px-6">
         <span>
-          © {new Date().getFullYear()} {profile.name}
+          © {new Date().getFullYear()}{" "}
+          <a
+            href={`https://github.com/kurrna`}
+            className="transition-colors hover:text-foreground"
+          >
+            {profile.name}
+          </a>
         </span>
         <a
           href={`mailto:${profile.email}`}

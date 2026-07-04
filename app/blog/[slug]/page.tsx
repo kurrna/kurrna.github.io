@@ -44,17 +44,37 @@ export default async function BlogPostPage({
   return (
     <div className="min-h-screen bg-background text-foreground">
       <BlogNav />
-      <main className="mx-auto flex max-w-4xl flex-col gap-8 px-4 py-10 md:px-6 md:py-14">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="mx-auto flex max-w-4xl flex-col gap-8 px-4 py-10 focus:outline-none md:px-6 md:py-14"
+      >
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <Button variant="ghost" asChild>
+          <Button variant="ghost" className="min-h-11" asChild>
             <Link href="/blog">返回博客</Link>
           </Button>
           <div className="flex gap-2">
             <Badge variant="outline">{post.category}</Badge>
-            <Badge variant="secondary">{post.date}</Badge>
+            <Badge variant="secondary" asChild>
+              <time dateTime={post.date}>{post.date}</time>
+            </Badge>
           </div>
         </div>
-        <article className="rounded-md border bg-card p-5 text-card-foreground md:p-8">
+        <article
+          aria-labelledby="post-title"
+          className="rounded-md border bg-card p-5 text-card-foreground md:p-8"
+        >
+          <header className="mb-8 border-b pb-6">
+            <h1
+              id="post-title"
+              className="font-heading text-3xl font-semibold tracking-tight md:text-4xl"
+            >
+              {post.title}
+            </h1>
+            <p className="mt-3 text-lg leading-8 text-muted-foreground">
+              {post.description}
+            </p>
+          </header>
           <MarkdownRender
             content={content}
             final

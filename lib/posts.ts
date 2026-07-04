@@ -24,7 +24,7 @@ export async function getPosts() {
 export async function getPostContent(post: Pick<BlogPost, "filePath">) {
   const content = await readFile(post.filePath, "utf8");
 
-  return stripFrontmatter(content);
+  return stripFrontmatter(content).replace(/^\s*#\s+.*(?:\r?\n|$)/, "");
 }
 
 async function readPostMeta(file: string): Promise<BlogPost> {

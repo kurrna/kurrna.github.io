@@ -30,7 +30,11 @@ export default async function BlogPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <BlogNav />
-      <main className="mx-auto flex max-w-5xl flex-col gap-10 px-4 py-12 md:px-6 md:py-16">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="mx-auto flex max-w-5xl flex-col gap-10 px-4 py-12 focus:outline-none md:px-6 md:py-16"
+      >
         <header className="flex flex-col gap-6 border-b pb-10">
           <div className="flex items-center gap-2 font-mono text-sm text-muted-foreground">
             <BookOpenTextIcon />
@@ -62,16 +66,23 @@ export default async function BlogPage() {
           {posts.map((post) => (
             <Card key={post.slug} className="rounded-md shadow-none transition-colors hover:bg-accent">
               <CardHeader>
-                <CardTitle className="text-2xl">{post.title}</CardTitle>
+                <CardTitle asChild className="text-2xl">
+                  <h2>{post.title}</h2>
+                </CardTitle>
                 <CardDescription>{post.description}</CardDescription>
                 <CardAction className="flex gap-2">
                   <Badge variant="outline">{post.category}</Badge>
-                  <Badge variant="secondary">{post.date}</Badge>
+                  <Badge variant="secondary" asChild>
+                    <time dateTime={post.date}>{post.date}</time>
+                  </Badge>
                 </CardAction>
               </CardHeader>
               <CardContent>
-                <Button variant="ghost" asChild>
-                  <Link href={`/blog/${post.slug}`}>
+                <Button variant="ghost" className="min-h-11" asChild>
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    aria-label={`阅读《${post.title}》全文`}
+                  >
                     阅读全文
                     <ArrowRightIcon data-icon="inline-end" />
                   </Link>

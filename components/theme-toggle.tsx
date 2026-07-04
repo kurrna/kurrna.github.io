@@ -30,6 +30,7 @@ export function ThemeToggle() {
       type="button"
       variant="outline"
       size="icon"
+      className="size-11"
       aria-label={isDark ? "切换到浅色模式" : "切换到深色模式"}
       aria-pressed={isDark}
       title={isDark ? "浅色模式" : "深色模式"}

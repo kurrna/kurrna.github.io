@@ -24,7 +24,11 @@ export default async function BlogArchivePage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <BlogNav />
-      <main className="mx-auto flex max-w-5xl flex-col gap-10 px-4 py-12 md:px-6 md:py-16">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="mx-auto flex max-w-5xl flex-col gap-10 px-4 py-12 focus:outline-none md:px-6 md:py-16"
+      >
         <header className="flex flex-col gap-3 border-b pb-8">
           <div className="flex items-center gap-2 font-mono text-sm text-muted-foreground">
             <ArchiveIcon />
@@ -41,7 +45,9 @@ export default async function BlogArchivePage() {
             return (
               <Card key={year} className="gap-0 rounded-md py-0 shadow-none">
                 <CardHeader className="py-5">
-                  <CardTitle className="text-3xl">{year}</CardTitle>
+                  <CardTitle asChild className="text-3xl">
+                    <h2>{year}</h2>
+                  </CardTitle>
                   <CardDescription>{yearPosts.length} 篇文章</CardDescription>
                 </CardHeader>
                 <CardContent className="p-0">
@@ -51,7 +57,10 @@ export default async function BlogArchivePage() {
                       href={`/blog/${post.slug}`}
                       className="grid gap-3 border-t px-6 py-4 transition-colors hover:bg-muted sm:grid-cols-[5rem_1fr_auto] sm:items-center"
                     >
-                      <time className="font-mono text-sm text-muted-foreground">
+                      <time
+                        dateTime={post.date}
+                        className="font-mono text-sm text-muted-foreground"
+                      >
                         {post.date.slice(5)}
                       </time>
                       <span className="font-medium">{post.title}</span>

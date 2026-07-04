@@ -16,14 +16,14 @@ export const projects = [
     title: "TimeCampus 时光航迹地图",
     site: "https://www.timecampus.asia",
     description:
-      "一个基于 Spring Boot、React 的时光胶囊地图 Web 全栈应用，集成了游客导览与后台运营智能体，与北航校史馆合作展示。",
+      "校园时光机地图，将北航校园历史记忆装进时光胶囊。基于 Spring Boot、React 的 Web 全栈应用，集成了游客导览与后台运营智能体功能。\n北航校史馆合作项目",
     tags: ["Spring Boot", "LangGraph", "Spring AI", "React", "Redis", "MySQL"],
     href: "https://github.com/BUAA2026SE-404NotFound/TimeCampus",
   },
   {
     title: "TimeCampus-Agent",
     description:
-      "时光航迹项目的智能体模块，基于 LangGraph 和时光航迹后端的 Spring AI MCP Server，支持RAG、知识图谱问答、智能体任务执行等功能。",
+      "时光航迹项目的智能体模块，基于 LangGraph 和时光航迹后端的 Spring AI MCP Server，支持RAG混合检索、问答、智能体任务执行等功能。",
     tags: ["LangGraph", "Python", "Spring AI", "RAG", "Agent", "Qdrant"],
     href: "https://github.com/BUAA2026SE-404NotFound/TimeCampus-Agent",
   },

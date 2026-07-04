@@ -1,5 +1,5 @@
 ---
-title: Review Notes of Algorithm Design
+title: Review Notes of Algorithm
 description: 算法设计复习笔记，分为分治、动态规划、贪心和图算法四个部分。
 date: 2026-01-05
 category: 学习笔记
@@ -677,7 +677,7 @@ category: 学习笔记
 
 ## 常见算法与数据结构
 
-#### Bucket_Sort
+### Bucket_Sort
 
 - [桶排序](https://raw.githubusercontent.com/kurrna/algorithm/refs/heads/master/src/algorithms/BucketSort.cpp)
   - 适用条件：数据取值范围已知且数据分布相对均匀

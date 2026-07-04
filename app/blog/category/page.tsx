@@ -24,7 +24,11 @@ export default async function BlogCategoryPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <BlogNav />
-      <main className="mx-auto flex max-w-5xl flex-col gap-10 px-4 py-12 md:px-6 md:py-16">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="mx-auto flex max-w-5xl flex-col gap-10 px-4 py-12 focus:outline-none md:px-6 md:py-16"
+      >
         <header className="flex flex-col gap-3 border-b pb-8">
           <div className="flex items-center gap-2 font-mono text-sm text-muted-foreground">
             <TagIcon />
@@ -41,7 +45,9 @@ export default async function BlogCategoryPage() {
             return (
               <Card key={category} id={category} className="rounded-md shadow-none">
                 <CardHeader>
-                  <CardTitle className="text-2xl">{category}</CardTitle>
+                  <CardTitle asChild className="text-2xl">
+                    <h2>{category}</h2>
+                  </CardTitle>
                   <CardDescription>{categoryPosts.length} 篇文章</CardDescription>
                   <CardAction>
                     <Badge variant="outline">{String(categoryPosts.length).padStart(2, "0")}</Badge>
@@ -55,7 +61,12 @@ export default async function BlogCategoryPage() {
                       className="grid gap-1 rounded-md px-3 py-3 transition-colors hover:bg-muted"
                     >
                       <span className="font-medium">{post.title}</span>
-                      <time className="font-mono text-sm text-muted-foreground">{post.date}</time>
+                      <time
+                        dateTime={post.date}
+                        className="font-mono text-sm text-muted-foreground"
+                      >
+                        {post.date}
+                      </time>
                     </Link>
                   ))}
                 </CardContent>
