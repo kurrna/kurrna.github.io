@@ -1,22 +1,20 @@
 ---
 title: To Watch List
-description: 片单
+description: 待看的电影和剧🎞️🍿
 date: 2026-07-05
 category: 随笔
 ---
 
 # To Watch List
 
-最近想看的电影和剧
+待看的电影和剧🎞️🍿
 
-- [ ] **《龙虾》The Lobster (2015)**
-  - 加入日期：2026-07-05
+- [ ] [**龙虾 The Lobster (2015)**](https://movie.douban.com/subject/20514947/)
 
-- [ ] **《派对搭讪秘诀》How to Talk to Girls at Parties (2017)**
-  - 加入日期：2026-07-05
+- [ ] [**派对搭讪秘诀 How to Talk to Girls at Parties (2017)**](https://movie.douban.com/subject/25925764/)
 
-- [ ] **《浴室春情》Deep End (1970)**
-  - 加入日期：2026-07-05
+- [ ] [**浴室春情 Deep End (1970)**](https://movie.douban.com/subject/1300644/)
 
-- [ ] **《歪小子斯科特对抗全世界》Scott Pilgrim vs. the World (2010)**
-  - 加入日期：2026-07-05
+- [ ] [**歪小子斯科特对抗全世界 Scott Pilgrim vs. the World (2010)**](https://movie.douban.com/subject/2158222/)
+
+- [ ] [**歪小子斯科特：火力全开 Scott Pilgrim Takes Off (2023)**](https://movie.douban.com/subject/35742646/)
