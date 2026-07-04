@@ -68,11 +68,11 @@
 
 @theme inline {
 
-  --font-heading: var(--font-geist-sans);
+  --font-heading: var(--font-jetbrains-mono), var(--font-noto-sans-sc), ui-monospace, monospace;
 
-  --font-mono: var(--font-geist-mono);
+  --font-mono: var(--font-jetbrains-mono), var(--font-noto-sans-sc), ui-monospace, monospace;
 
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-jetbrains-mono), var(--font-noto-sans-sc), ui-monospace, monospace;
 
   --color-sidebar-ring: var(--sidebar-ring);
 

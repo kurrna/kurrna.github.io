@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import {
@@ -53,7 +53,7 @@ export function HomePage({ posts }: { posts: HomePost[] }) {
 
       return () => media.revert();
     },
-    { scope: rootRef }
+    { scope: rootRef },
   );
 
   return (
@@ -73,7 +73,10 @@ function Header() {
   return (
     <header className="sticky top-0 z-50 border-b bg-background/90 backdrop-blur">
       <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 md:px-6">
-        <a href="#about" className="font-heading text-lg font-semibold tracking-tight">
+        <a
+          href="#about"
+          className="font-heading text-lg font-semibold tracking-tight"
+        >
           Kurna
         </a>
         <div className="flex items-center gap-1">
@@ -94,13 +97,35 @@ function Header() {
 }
 
 function Hero() {
+  const [typingSvgColor, setTypingSvgColor] = useState("000000");
+
+  useEffect(() => {
+    function updateColor() {
+      const isDark = document.documentElement.classList.contains("dark");
+      setTypingSvgColor(isDark ? "FFFFFF" : "000000");
+    }
+
+    updateColor();
+
+    const observer = new MutationObserver(updateColor);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
       id="about"
       className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:px-6 md:py-20 lg:grid-cols-2 lg:items-center"
     >
       <div className="flex flex-col items-start gap-7">
-        <div data-reveal className="flex items-center gap-3 text-base text-muted-foreground">
+        <div
+          data-reveal
+          className="flex items-center gap-3 text-base text-muted-foreground"
+        >
           <span>BUAA / COMPUTER SCIENCE</span>
           <span aria-hidden="true">·</span>
           <span>BEIJING</span>
@@ -109,18 +134,26 @@ function Hero() {
         <div className="flex flex-col gap-5">
           <h3
             data-reveal
-            className="font-heading text-5xl font-semibold leading-none tracking-tight sm:text-5xl md:text-6xl"
+            className="font-heading text-5xl font-bold leading-none tracking-tight sm:text-5xl md:text-6xl"
           >
             {profile.name}
           </h3>
-          <p data-reveal className="max-w-2xl text-xl leading-8 text-muted-foreground md:text-2xl">
-            计算机科学本科生，努力提升计算机水平与工程能力中…
+          <a href="https://git.io/typing-svg">
+            <img
+              src={`https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=40&duration=1000&pause=1000&color=${typingSvgColor}&multiline=true&repeat=false&width=700&height=150&lines=Hi+there%F0%9F%91%8B;I%E2%80%99m+Kurna%F0%9F%90%BB;So+glad+to+meet+you+here!%F0%9F%98%BA`}
+              alt="Typing SVG"
+            />
+          </a>
+          <p
+            data-reveal
+            className="max-w-2xl text-xl leading-8 text-muted-foreground md:text-2xl"
+          >
+            努力提升计算机水平与工程能力中…
           </p>
-          <p data-reveal className="max-w-xl text-lg leading-8 text-muted-foreground">
-            {profile.bio}。想要深入研究 Agent、前端开发与全栈工程实践。
-          </p>
+          {/*<p data-reveal className="max-w-xl text-lg leading-8 text-muted-foreground">
+            {profile.bio}。
+          </p>*/}
         </div>
-
         <div data-reveal className="flex flex-wrap gap-3">
           <Button size="lg" className="min-w-36" asChild>
             <a href={profile.github} target="_blank" rel="noreferrer">
@@ -152,13 +185,20 @@ function ProfilePanel() {
   ];
 
   return (
-    <Card data-reveal className="gap-0 overflow-hidden rounded-md py-0 shadow-none">
+    <Card
+      data-reveal
+      className="gap-0 overflow-hidden rounded-md py-0 shadow-none"
+    >
       <CardHeader className="py-4">
         <div className="flex items-center justify-between gap-4">
           <div>
-            <CardDescription className="font-mono">PROFILE / 2026.06</CardDescription>
+            <CardDescription className="font-mono">
+              PROFILE / 2026.06
+            </CardDescription>
           </div>
-          <Badge variant="outline" className="text-sm">Available for work</Badge>
+          <Badge variant="outline" className="text-sm">
+            Available for work
+          </Badge>
         </div>
       </CardHeader>
       <Separator />
@@ -274,7 +314,9 @@ function Writing({ posts }: { posts: HomePost[] }) {
             href={`/blog/${post.slug}`}
             className="group grid gap-3 border-b py-4 transition-colors hover:bg-muted/50 sm:grid-cols-[7rem_1fr_auto] sm:items-center sm:px-3"
           >
-            <time className="font-mono text-sm text-muted-foreground">{post.date}</time>
+            <time className="font-mono text-sm text-muted-foreground">
+              {post.date}
+            </time>
             <div className="min-w-0">
               <h3 className="font-heading text-xl font-medium">{post.title}</h3>
               <p className="mt-1 line-clamp-1 text-base leading-6 text-muted-foreground">
@@ -306,8 +348,12 @@ function SectionHeading({
 }) {
   return (
     <div data-reveal className="flex max-w-xl flex-col gap-3">
-      <p className="font-mono text-xs tracking-[0.2em] text-muted-foreground">{eyebrow}</p>
-      <h2 className="font-heading text-3xl font-semibold tracking-tight md:text-4xl">{title}</h2>
+      <p className="font-mono text-xs tracking-[0.2em] text-muted-foreground">
+        {eyebrow}
+      </p>
+      <h2 className="font-heading text-3xl font-semibold tracking-tight md:text-4xl">
+        {title}
+      </h2>
       <p className="text-lg leading-8 text-muted-foreground">{description}</p>
     </div>
   );
@@ -317,8 +363,13 @@ function Footer() {
   return (
     <footer className="border-t">
       <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-8 text-base text-muted-foreground sm:flex-row sm:items-center sm:justify-between md:px-6">
-        <span>© {new Date().getFullYear()} {profile.name}</span>
-        <a href={`mailto:${profile.email}`} className="transition-colors hover:text-foreground">
+        <span>
+          © {new Date().getFullYear()} {profile.name}
+        </span>
+        <a
+          href={`mailto:${profile.email}`}
+          className="transition-colors hover:text-foreground"
+        >
           {profile.email}
         </a>
       </div>
