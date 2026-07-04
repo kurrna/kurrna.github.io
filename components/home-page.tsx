@@ -20,8 +20,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { education, profile, projects } from "@/lib/site";
+import { profile, projects } from "@/lib/site";
 
 gsap.registerPlugin(useGSAP);
 
@@ -185,9 +191,10 @@ function Hero() {
 function ProfilePanel() {
   const details = [
     ["STATUS", "Undergraduate"],
+    ["LOCATION", profile.location],
     ["FOCUS", "Backend / Agent / Web"],
-    ["EDUCATION", education.school],
-    ["GPA", education.gpa],
+    ["EDUCATION", profile.school],
+    ["HOBBYS", profile.hobbys.join(" / ")],
     ["EMAIL", profile.email],
   ];
 
@@ -200,7 +207,7 @@ function ProfilePanel() {
         <div className="flex items-center justify-between gap-4">
           <div>
             <CardDescription className="font-mono">
-              PROFILE / 2026.06
+              PROFILE / 2026.07
             </CardDescription>
           </div>
           <Badge variant="outline" className="text-sm">
@@ -260,43 +267,58 @@ function Projects() {
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <div className="flex gap-1">
+                    <TooltipProvider>
                     {project.site ? (
-                      <Button
-                        variant="ghost"
-                        size="icon-sm"
-                        className="size-11"
-                        asChild
-                      >
-                        <a
-                          href={project.site}
-                          target="_blank"
-                          rel="noreferrer"
-                          aria-label={`${project.title} 网站`}
-                        >
-                          <GlobeHemisphereWestIcon />
-                        </a>
-                      </Button>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="icon-sm"
+                            className="size-11 transition-transform hover:scale-110"
+                            asChild
+                          >
+                            <a
+                              href={project.site}
+                              target="_blank"
+                              rel="noreferrer"
+                              aria-label={`${project.title} 网站`}
+                            >
+                              <GlobeHemisphereWestIcon size={24} className="size-6" />
+                            </a>
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>查看网站</TooltipContent>
+                      </Tooltip>
                     ) : null}
-                    <Button
-                      variant="ghost"
-                      size="icon-sm"
-                      className="size-11"
-                      asChild
-                    >
-                      <a
-                        href={project.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label={`${project.title} GitHub`}
-                      >
-                        <GithubLogoIcon />
-                      </a>
-                    </Button>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="icon-sm"
+                            className="size-11 transition-transform hover:scale-110"
+                            asChild
+                          >
+                            <a
+                              href={project.href}
+                              target="_blank"
+                              rel="noreferrer"
+                              aria-label={`${project.title} GitHub`}
+                            >
+                              <GithubLogoIcon size={24} className="size-6" />
+                            </a>
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>查看源码</TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
                   </div>
                 </div>
                 <CardTitle asChild className="text-xl">
                   <h3>{project.title}</h3>
                 </CardTitle>
+                <p className="mb-2 text-sm leading-5 text-muted-foreground">
+                  {project.subtitle}
+                </p>
                 <CardDescription className="leading-7 whitespace-pre-wrap">
                   {project.description}
                 </CardDescription>
