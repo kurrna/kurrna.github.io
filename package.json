@@ -24,6 +24,7 @@
     "gsap": "^3.15.0",
     "katex": "^0.17.0",
     "markstream-react": "^0.0.52",
+    "mermaid": "^11.16.0",
     "next": "^16.2.9",
     "radix-ui": "^1.6.0",
     "react": "^19.2.4",

@@ -82,7 +82,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             batchRendering={false}
             deferNodesUntilVisible={false}
             maxLiveNodes={0}
-            renderCodeBlocksAsPre
           />
         </article>
       </main>

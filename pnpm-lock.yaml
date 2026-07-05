@@ -29,6 +29,9 @@ importers:
       markstream-react:
         specifier: ^0.0.52
         version: 0.0.52(katex@0.17.0)(mermaid@11.16.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      mermaid:
+        specifier: ^11.16.0
+        version: 11.16.0
       next:
         specifier: ^16.2.9
         version: 16.2.9(@babel/core@7.29.7)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -4187,7 +4190,6 @@ snapshots:
     dependencies:
       package-manager-detector: 1.7.0
       tinyexec: 1.2.4
-    optional: true
 
   '@babel/code-frame@7.29.7':
     dependencies:
@@ -4375,11 +4377,9 @@ snapshots:
       '@babel/helper-string-parser': 7.29.7
       '@babel/helper-validator-identifier': 7.29.7
 
-  '@braintree/sanitize-url@7.1.2':
-    optional: true
+  '@braintree/sanitize-url@7.1.2': {}
 
-  '@chevrotain/types@11.1.2':
-    optional: true
+  '@chevrotain/types@11.1.2': {}
 
   '@dotenvx/dotenvx@1.75.1':
     dependencies:
@@ -4511,15 +4511,13 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@iconify/types@2.0.0':
-    optional: true
+  '@iconify/types@2.0.0': {}
 
   '@iconify/utils@3.1.3':
     dependencies:
       '@antfu/install-pkg': 1.1.0
       '@iconify/types': 2.0.0
       import-meta-resolve: 4.2.0
-    optional: true
 
   '@img/colour@1.1.0':
     optional: true
@@ -4640,7 +4638,6 @@ snapshots:
   '@mermaid-js/parser@1.2.0':
     dependencies:
       '@chevrotain/types': 11.1.2
-    optional: true
 
   '@modelcontextprotocol/sdk@1.29.0(zod@3.25.76)':
     dependencies:
@@ -5554,119 +5551,89 @@ snapshots:
       tslib: 2.8.1
     optional: true
 
-  '@types/d3-array@3.2.2':
-    optional: true
+  '@types/d3-array@3.2.2': {}
 
   '@types/d3-axis@3.0.6':
     dependencies:
       '@types/d3-selection': 3.0.11
-    optional: true
 
   '@types/d3-brush@3.0.6':
     dependencies:
       '@types/d3-selection': 3.0.11
-    optional: true
 
-  '@types/d3-chord@3.0.6':
-    optional: true
+  '@types/d3-chord@3.0.6': {}
 
-  '@types/d3-color@3.1.3':
-    optional: true
+  '@types/d3-color@3.1.3': {}
 
   '@types/d3-contour@3.0.6':
     dependencies:
       '@types/d3-array': 3.2.2
       '@types/geojson': 7946.0.16
-    optional: true
 
-  '@types/d3-delaunay@6.0.4':
-    optional: true
+  '@types/d3-delaunay@6.0.4': {}
 
-  '@types/d3-dispatch@3.0.7':
-    optional: true
+  '@types/d3-dispatch@3.0.7': {}
 
   '@types/d3-drag@3.0.7':
     dependencies:
       '@types/d3-selection': 3.0.11
-    optional: true
 
-  '@types/d3-dsv@3.0.7':
-    optional: true
+  '@types/d3-dsv@3.0.7': {}
 
-  '@types/d3-ease@3.0.2':
-    optional: true
+  '@types/d3-ease@3.0.2': {}
 
   '@types/d3-fetch@3.0.7':
     dependencies:
       '@types/d3-dsv': 3.0.7
-    optional: true
 
-  '@types/d3-force@3.0.10':
-    optional: true
+  '@types/d3-force@3.0.10': {}
 
-  '@types/d3-format@3.0.4':
-    optional: true
+  '@types/d3-format@3.0.4': {}
 
   '@types/d3-geo@3.1.0':
     dependencies:
       '@types/geojson': 7946.0.16
-    optional: true
 
-  '@types/d3-hierarchy@3.1.7':
-    optional: true
+  '@types/d3-hierarchy@3.1.7': {}
 
   '@types/d3-interpolate@3.0.4':
     dependencies:
       '@types/d3-color': 3.1.3
-    optional: true
 
-  '@types/d3-path@3.1.1':
-    optional: true
+  '@types/d3-path@3.1.1': {}
 
-  '@types/d3-polygon@3.0.2':
-    optional: true
+  '@types/d3-polygon@3.0.2': {}
 
-  '@types/d3-quadtree@3.0.6':
-    optional: true
+  '@types/d3-quadtree@3.0.6': {}
 
-  '@types/d3-random@3.0.4':
-    optional: true
+  '@types/d3-random@3.0.4': {}
 
-  '@types/d3-scale-chromatic@3.1.0':
-    optional: true
+  '@types/d3-scale-chromatic@3.1.0': {}
 
   '@types/d3-scale@4.0.9':
     dependencies:
       '@types/d3-time': 3.0.4
-    optional: true
 
-  '@types/d3-selection@3.0.11':
-    optional: true
+  '@types/d3-selection@3.0.11': {}
 
   '@types/d3-shape@3.1.8':
     dependencies:
       '@types/d3-path': 3.1.1
-    optional: true
 
-  '@types/d3-time-format@4.0.3':
-    optional: true
+  '@types/d3-time-format@4.0.3': {}
 
-  '@types/d3-time@3.0.4':
-    optional: true
+  '@types/d3-time@3.0.4': {}
 
-  '@types/d3-timer@3.0.2':
-    optional: true
+  '@types/d3-timer@3.0.2': {}
 
   '@types/d3-transition@3.0.9':
     dependencies:
       '@types/d3-selection': 3.0.11
-    optional: true
 
   '@types/d3-zoom@3.0.8':
     dependencies:
       '@types/d3-interpolate': 3.0.4
       '@types/d3-selection': 3.0.11
-    optional: true
 
   '@types/d3@7.4.3':
     dependencies:
@@ -5700,12 +5667,10 @@ snapshots:
       '@types/d3-timer': 3.0.2
       '@types/d3-transition': 3.0.9
       '@types/d3-zoom': 3.0.8
-    optional: true
 
   '@types/estree@1.0.9': {}
 
-  '@types/geojson@7946.0.16':
-    optional: true
+  '@types/geojson@7946.0.16': {}
 
   '@types/json-schema@7.0.15': {}
 
@@ -5897,7 +5862,6 @@ snapshots:
     optionalDependencies:
       d3-selection: 3.0.0
       d3-transition: 3.0.1(d3-selection@3.0.0)
-    optional: true
 
   accepts@2.0.0:
     dependencies:
@@ -6142,8 +6106,7 @@ snapshots:
 
   commander@14.0.3: {}
 
-  commander@7.2.0:
-    optional: true
+  commander@7.2.0: {}
 
   commander@8.3.0: {}
 
@@ -6182,12 +6145,10 @@ snapshots:
   cose-base@1.0.3:
     dependencies:
       layout-base: 1.0.2
-    optional: true
 
   cose-base@2.2.0:
     dependencies:
       layout-base: 2.0.1
-    optional: true
 
   cosmiconfig@9.0.2(typescript@6.0.3):
     dependencies:
@@ -6212,29 +6173,23 @@ snapshots:
     dependencies:
       cose-base: 1.0.3
       cytoscape: 3.34.0
-    optional: true
 
   cytoscape-fcose@2.2.0(cytoscape@3.34.0):
     dependencies:
       cose-base: 2.2.0
       cytoscape: 3.34.0
-    optional: true
 
-  cytoscape@3.34.0:
-    optional: true
+  cytoscape@3.34.0: {}
 
   d3-array@2.12.1:
     dependencies:
       internmap: 1.0.1
-    optional: true
 
   d3-array@3.2.4:
     dependencies:
       internmap: 2.0.3
-    optional: true
 
-  d3-axis@3.0.0:
-    optional: true
+  d3-axis@3.0.0: {}
 
   d3-brush@3.0.0:
     dependencies:
@@ -6243,99 +6198,77 @@ snapshots:
       d3-interpolate: 3.0.1
       d3-selection: 3.0.0
       d3-transition: 3.0.1(d3-selection@3.0.0)
-    optional: true
 
   d3-chord@3.0.1:
     dependencies:
       d3-path: 3.1.0
-    optional: true
 
-  d3-color@3.1.0:
-    optional: true
+  d3-color@3.1.0: {}
 
   d3-contour@4.0.2:
     dependencies:
       d3-array: 3.2.4
-    optional: true
 
   d3-delaunay@6.0.4:
     dependencies:
       delaunator: 5.1.0
-    optional: true
 
-  d3-dispatch@3.0.1:
-    optional: true
+  d3-dispatch@3.0.1: {}
 
   d3-drag@3.0.0:
     dependencies:
       d3-dispatch: 3.0.1
       d3-selection: 3.0.0
-    optional: true
 
   d3-dsv@3.0.1:
     dependencies:
       commander: 7.2.0
       iconv-lite: 0.6.3
       rw: 1.3.3
-    optional: true
 
-  d3-ease@3.0.1:
-    optional: true
+  d3-ease@3.0.1: {}
 
   d3-fetch@3.0.1:
     dependencies:
       d3-dsv: 3.0.1
-    optional: true
 
   d3-force@3.0.0:
     dependencies:
       d3-dispatch: 3.0.1
       d3-quadtree: 3.0.1
       d3-timer: 3.0.1
-    optional: true
 
-  d3-format@3.1.2:
-    optional: true
+  d3-format@3.1.2: {}
 
   d3-geo@3.1.1:
     dependencies:
       d3-array: 3.2.4
-    optional: true
 
-  d3-hierarchy@3.1.2:
-    optional: true
+  d3-hierarchy@3.1.2: {}
 
   d3-interpolate@3.0.1:
     dependencies:
       d3-color: 3.1.0
-    optional: true
 
-  d3-path@1.0.9:
-    optional: true
+  d3-path@1.0.9: {}
 
-  d3-path@3.1.0:
-    optional: true
+  d3-path@3.1.0: {}
 
-  d3-polygon@3.0.1:
-    optional: true
+  d3-polygon@3.0.1: {}
 
-  d3-quadtree@3.0.1:
-    optional: true
+  d3-quadtree@3.0.1: {}
 
-  d3-random@3.0.1:
-    optional: true
+  d3-random@3.0.1: {}
 
   d3-sankey@0.12.3:
     dependencies:
       d3-array: 2.12.1
       d3-shape: 1.3.7
-    optional: true
 
   d3-scale-chromatic@3.1.0:
     dependencies:
       d3-color: 3.1.0
       d3-interpolate: 3.0.1
-    optional: true
 
   d3-scale@4.0.2:
     dependencies:
@@ -6344,33 +6277,26 @@ snapshots:
       d3-interpolate: 3.0.1
       d3-time: 3.1.0
       d3-time-format: 4.1.0
-    optional: true
 
-  d3-selection@3.0.0:
-    optional: true
+  d3-selection@3.0.0: {}
 
   d3-shape@1.3.7:
     dependencies:
       d3-path: 1.0.9
-    optional: true
 
   d3-shape@3.2.0:
     dependencies:
       d3-path: 3.1.0
-    optional: true
 
   d3-time-format@4.1.0:
     dependencies:
       d3-time: 3.1.0
-    optional: true
 
   d3-time@3.1.0:
     dependencies:
       d3-array: 3.2.4
-    optional: true
 
-  d3-timer@3.0.1:
-    optional: true
+  d3-timer@3.0.1: {}
 
   d3-transition@3.0.1(d3-selection@3.0.0):
     dependencies:
@@ -6380,7 +6306,6 @@ snapshots:
       d3-interpolate: 3.0.1
       d3-selection: 3.0.0
       d3-timer: 3.0.1
-    optional: true
 
   d3-zoom@3.0.0:
     dependencies:
@@ -6389,7 +6314,6 @@ snapshots:
       d3-interpolate: 3.0.1
       d3-selection: 3.0.0
       d3-transition: 3.0.1(d3-selection@3.0.0)
-    optional: true
 
   d3@7.9.0:
     dependencies:
@@ -6423,13 +6347,11 @@ snapshots:
       d3-timer: 3.0.1
       d3-transition: 3.0.1(d3-selection@3.0.0)
       d3-zoom: 3.0.0
-    optional: true
 
   dagre-d3-es@7.0.14:
     dependencies:
       d3: 7.9.0
       lodash-es: 4.18.1
-    optional: true
 
   damerau-levenshtein@1.0.8: {}
 
@@ -6453,8 +6375,7 @@ snapshots:
       es-errors: 1.3.0
       is-data-view: 1.0.2
 
-  dayjs@1.11.21:
-    optional: true
+  dayjs@1.11.21: {}
 
   debounce-fn@4.0.0:
     dependencies:
@@ -6500,7 +6421,6 @@ snapshots:
   delaunator@5.1.0:
     dependencies:
       robust-predicates: 3.0.3
-    optional: true
 
   depd@2.0.0: {}
 
@@ -6517,7 +6437,6 @@ snapshots:
   dompurify@3.4.11:
     optionalDependencies:
       '@types/trusted-types': 2.0.7
-    optional: true
 
   dot-prop@6.0.1:
     dependencies:
@@ -6670,8 +6589,7 @@ snapshots:
       is-date-object: 1.1.0
       is-symbol: 1.1.1
 
-  es-toolkit@1.49.0:
-    optional: true
+  es-toolkit@1.49.0: {}
 
   escalade@3.2.0: {}
 
@@ -7143,8 +7061,7 @@ snapshots:
 
   gsap@3.15.0: {}
 
-  hachure-fill@0.5.2:
-    optional: true
+  hachure-fill@0.5.2: {}
 
   has-bigints@1.1.0: {}
 
@@ -7198,7 +7115,6 @@ snapshots:
   iconv-lite@0.6.3:
     dependencies:
       safer-buffer: 2.1.2
-    optional: true
 
   iconv-lite@0.7.2:
     dependencies:
@@ -7213,8 +7129,7 @@ snapshots:
       parent-module: 1.0.1
       resolve-from: 4.0.0
 
-  import-meta-resolve@4.2.0:
-    optional: true
+  import-meta-resolve@4.2.0: {}
 
   imurmurhash@0.1.4: {}
 
@@ -7226,11 +7141,9 @@ snapshots:
       hasown: 2.0.4
       side-channel: 1.1.1
 
-  internmap@1.0.1:
-    optional: true
+  internmap@1.0.1: {}
 
-  internmap@2.0.3:
-    optional: true
+  internmap@2.0.3: {}
 
   ip-address@10.2.0: {}
 
@@ -7455,7 +7368,6 @@ snapshots:
   katex@0.16.47:
     dependencies:
       commander: 8.3.0
-    optional: true
 
   katex@0.17.0:
     dependencies:
@@ -7465,8 +7377,7 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  khroma@2.1.0:
-    optional: true
+  khroma@2.1.0: {}
 
   kleur@3.0.3: {}
 
@@ -7478,11 +7389,9 @@ snapshots:
     dependencies:
       language-subtag-registry: 0.3.23
 
-  layout-base@1.0.2:
-    optional: true
+  layout-base@1.0.2: {}
 
-  layout-base@2.0.1:
-    optional: true
+  layout-base@2.0.1: {}
 
   levn@0.4.1:
     dependencies:
@@ -7553,8 +7462,7 @@ snapshots:
     dependencies:
       p-locate: 5.0.0
 
-  lodash-es@4.18.1:
-    optional: true
+  lodash-es@4.18.1: {}
 
   lodash.merge@4.6.2: {}
 
@@ -7599,8 +7507,7 @@ snapshots:
       punycode.js: 2.3.1
       uc.micro: 2.1.0
 
-  marked@16.4.2:
-    optional: true
+  marked@16.4.2: {}
 
   markstream-core@1.0.3: {}
 
@@ -7651,7 +7558,6 @@ snapshots:
       stylis: 4.4.0
       ts-dedent: 2.3.0
       uuid: 14.0.1
-    optional: true
 
   micromatch@4.0.8:
     dependencies:
@@ -7862,8 +7768,7 @@ snapshots:
 
   p-try@2.2.0: {}
 
-  package-manager-detector@1.7.0:
-    optional: true
+  package-manager-detector@1.7.0: {}
 
   parent-module@1.0.1:
     dependencies:
@@ -7882,8 +7787,7 @@ snapshots:
 
   path-browserify@1.0.1: {}
 
-  path-data-parser@0.1.0:
-    optional: true
+  path-data-parser@0.1.0: {}
 
   path-exists@3.0.0: {}
 
@@ -7909,14 +7813,12 @@ snapshots:
     dependencies:
       find-up: 3.0.0
 
-  points-on-curve@0.2.0:
-    optional: true
+  points-on-curve@0.2.0: {}
 
   points-on-path@0.2.1:
     dependencies:
       path-data-parser: 0.1.0
       points-on-curve: 0.2.0
-    optional: true
 
   possible-typed-array-names@1.1.0: {}
 
@@ -8131,8 +8033,7 @@ snapshots:
 
   reusify@1.1.0: {}
 
-  robust-predicates@3.0.3:
-    optional: true
+  robust-predicates@3.0.3: {}
 
   roughjs@4.6.6:
     dependencies:
@@ -8140,7 +8041,6 @@ snapshots:
       path-data-parser: 0.1.0
       points-on-curve: 0.2.0
       points-on-path: 0.2.1
-    optional: true
 
   router@2.2.0:
     dependencies:
@@ -8158,8 +8058,7 @@ snapshots:
     dependencies:
       queue-microtask: 1.2.3
 
-  rw@1.3.3:
-    optional: true
+  rw@1.3.3: {}
 
   safe-array-concat@1.1.4:
     dependencies:
@@ -8462,8 +8361,7 @@ snapshots:
     optionalDependencies:
       '@babel/core': 7.29.7
 
-  stylis@4.4.0:
-    optional: true
+  stylis@4.4.0: {}
 
   supports-color@7.2.0:
     dependencies:
@@ -8481,8 +8379,7 @@ snapshots:
 
   tiny-invariant@1.3.3: {}
 
-  tinyexec@1.2.4:
-    optional: true
+  tinyexec@1.2.4: {}
 
   tinyglobby@0.2.17:
     dependencies:
@@ -8499,8 +8396,7 @@ snapshots:
     dependencies:
       typescript: 6.0.3
 
-  ts-dedent@2.3.0:
-    optional: true
+  ts-dedent@2.3.0: {}
 
   ts-morph@26.0.0:
     dependencies:
@@ -8653,8 +8549,7 @@ snapshots:
 
   util-deprecate@1.0.2: {}
 
-  uuid@14.0.1:
-    optional: true
+  uuid@14.0.1: {}
 
   validate-npm-package-name@7.0.2: {}
 
