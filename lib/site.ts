@@ -36,11 +36,8 @@ export const projects = [
   {
     title: "Tsuki Framework",
     subtitle: "个人项目",
-    description:
-      "仿照 Spring 框架设计的一个轻量级 Java Web 框架，支持依赖注入、AOP、JDBC 和 MVC。",
+    description: "仿照 Spring 框架设计的一个轻量级 Java Web 框架，支持依赖注入、AOP、JDBC 和 MVC。",
     tags: ["Java", "Spring", "MVC", "AOP", "JDBC"],
     href: "https://github.com/kurrna/tsuki-framework",
   },
 ];
-
-

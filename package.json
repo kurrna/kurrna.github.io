@@ -8,7 +8,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "deploy": "pnpm build"
+    "deploy": "pnpm build",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit --incremental false",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "pnpm lint && pnpm typecheck && pnpm format:check"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -31,6 +37,10 @@
     "@types/node": "^22.14.0",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "16.2.9",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.9.4",
     "tailwindcss": "^4.3.1",
     "typescript": "^6.0.3"
   }

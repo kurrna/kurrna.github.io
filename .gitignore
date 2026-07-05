@@ -28,5 +28,7 @@ dist-ssr
 
 # Markdown content
 *.md
+!README.md
+!AGENTS.md
 !content/**/*.md
 !public/blogs/**/*.md
