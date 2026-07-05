@@ -12,7 +12,8 @@
   body {
     @apply antialiased bg-background text-foreground;
   }
-  button:not(:disabled), [role="button"]:not(:disabled) {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
     cursor: pointer;
   }
   html {
@@ -28,7 +29,9 @@
     scroll-behavior: auto;
   }
 
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -36,53 +39,53 @@
 }
 
 .markstream-react {
-    width: 100% !important;
-    max-width: 100%;
-    min-width: 0;
-    overflow-wrap: anywhere;
-  }
+  width: 100% !important;
+  max-width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
 
-  .markstream-react :where(.node-slot, .node-content, .paragraph-node, .heading-node, .list-node, .list-item) {
-    width: auto !important;
-    max-width: 100%;
-  }
+.markstream-react
+  :where(.node-slot, .node-content, .paragraph-node, .heading-node, .list-node, .list-item) {
+  width: auto !important;
+  max-width: 100%;
+}
 
-  .markstream-react pre {
-    max-width: 100%;
-    overflow-x: auto;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    background: var(--muted);
-    padding: 1rem;
-    color: var(--foreground);
-    line-height: 1.6;
-  }
+.markstream-react pre {
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--muted);
+  padding: 1rem;
+  color: var(--foreground);
+  line-height: 1.6;
+}
 
-  .markstream-react .table-node-wrapper {
-    max-width: 100%;
-    overflow-x: auto;
-  }
+.markstream-react .table-node-wrapper {
+  max-width: 100%;
+  overflow-x: auto;
+}
 
-  .markstream-react table {
-    width: max-content;
-    min-width: 100%;
-    border-collapse: collapse;
-  }
+.markstream-react table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+}
 
-  .markstream-react :where(th, td) {
-    border: 1px solid var(--border);
-    padding: 0.625rem 0.75rem;
-    vertical-align: top;
-    text-align: left;
-  }
+.markstream-react :where(th, td) {
+  border: 1px solid var(--border);
+  padding: 0.625rem 0.75rem;
+  vertical-align: top;
+  text-align: left;
+}
 
-  .markstream-react th {
-    background: var(--muted);
-    font-weight: 600;
-  }
+.markstream-react th {
+  background: var(--muted);
+  font-weight: 600;
+}
 
 @theme inline {
-
   --font-heading: var(--font-jetbrains-mono), var(--font-noto-sans-sc), ui-monospace, monospace;
 
   --font-mono: var(--font-jetbrains-mono), var(--font-noto-sans-sc), ui-monospace, monospace;
@@ -167,7 +170,6 @@
 }
 
 :root {
-
   --background: oklch(1 0 0);
 
   --foreground: oklch(0.148 0.004 228.8);
@@ -190,7 +192,7 @@
 
   --muted: oklch(0.963 0.002 197.1);
 
-  --muted-foreground: oklch(0.56 0.021 213.5);
+  --muted-foreground: oklch(0.52 0.024 213.5);
 
   --accent: oklch(0.963 0.002 197.1);
 
@@ -234,7 +236,6 @@
 }
 
 .dark {
-
   --background: oklch(0.148 0.004 228.8);
 
   --foreground: oklch(0.987 0.002 197.1);

@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import {
@@ -12,20 +14,9 @@ import {
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { profile, projects } from "@/lib/site";
 
@@ -130,10 +121,7 @@ function Hero() {
       className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:px-6 md:py-20 lg:grid-cols-2 lg:items-center"
     >
       <div className="flex flex-col items-start gap-7">
-        <div
-          data-reveal
-          className="flex items-center gap-3 text-base text-muted-foreground"
-        >
+        <div data-reveal className="flex items-center gap-3 text-base text-muted-foreground">
           <span>BUAA / COMPUTER SCIENCE</span>
           <span aria-hidden="true">·</span>
           <span>BEIJING</span>
@@ -146,16 +134,13 @@ function Hero() {
           >
             {profile.name}
           </h1>
-          <img
+          <Image
             src={`https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=40&duration=1000&pause=1000&color=${typingSvgColor}&multiline=true&repeat=false&width=700&height=150&lines=Hi+there%F0%9F%91%8B;I%E2%80%99m+Kurna%F0%9F%90%BB;So+glad+to+meet+you+here!%F0%9F%98%BA`}
             alt="Hi there! I’m Kurna. So glad to meet you here!"
             width={700}
             height={150}
           />
-          <p
-            data-reveal
-            className="max-w-2xl text-xl leading-8 text-muted-foreground md:text-2xl"
-          >
+          <p data-reveal className="max-w-2xl text-xl leading-8 text-muted-foreground md:text-2xl">
             努力提升计算机水平与工程能力中💪
           </p>
           {/*<p data-reveal className="max-w-xl text-lg leading-8 text-muted-foreground">
@@ -169,12 +154,7 @@ function Hero() {
               GitHub
             </a>
           </Button>
-          <Button
-            variant="outline"
-            size="lg"
-            className="min-h-11 min-w-36"
-            asChild
-          >
+          <Button variant="outline" size="lg" className="min-h-11 min-w-36" asChild>
             <a href={profile.resume}>
               <FileTextIcon data-icon="inline-start" />
               简历
@@ -199,16 +179,11 @@ function ProfilePanel() {
   ];
 
   return (
-    <Card
-      data-reveal
-      className="gap-0 overflow-hidden rounded-md py-0 shadow-none"
-    >
+    <Card data-reveal className="gap-0 overflow-hidden rounded-md py-0 shadow-none">
       <CardHeader className="py-4">
         <div className="flex items-center justify-between gap-4">
           <div>
-            <CardDescription className="font-mono">
-              PROFILE / 2026.07
-            </CardDescription>
+            <CardDescription className="font-mono">PROFILE / 2026.07</CardDescription>
           </div>
           <Badge variant="outline" className="text-sm">
             Available for work
@@ -268,28 +243,28 @@ function Projects() {
                   </span>
                   <div className="flex gap-1">
                     <TooltipProvider>
-                    {project.site ? (
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Button
-                            variant="ghost"
-                            size="icon-sm"
-                            className="size-11 transition-transform hover:scale-110"
-                            asChild
-                          >
-                            <a
-                              href={project.site}
-                              target="_blank"
-                              rel="noreferrer"
-                              aria-label={`${project.title} 网站`}
+                      {project.site ? (
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="ghost"
+                              size="icon-sm"
+                              className="size-11 transition-transform hover:scale-110"
+                              asChild
                             >
-                              <GlobeHemisphereWestIcon size={24} className="size-6" />
-                            </a>
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>查看网站</TooltipContent>
-                      </Tooltip>
-                    ) : null}
+                              <a
+                                href={project.site}
+                                target="_blank"
+                                rel="noreferrer"
+                                aria-label={`${project.title} 网站`}
+                              >
+                                <GlobeHemisphereWestIcon size={24} className="size-6" />
+                              </a>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>查看网站</TooltipContent>
+                        </Tooltip>
+                      ) : null}
                       <Tooltip>
                         <TooltipTrigger asChild>
                           <Button
@@ -316,9 +291,7 @@ function Projects() {
                 <CardTitle asChild className="text-xl">
                   <h3>{project.title}</h3>
                 </CardTitle>
-                <p className="mb-2 text-sm leading-5 text-muted-foreground">
-                  {project.subtitle}
-                </p>
+                <p className="mb-2 text-sm leading-5 text-muted-foreground">{project.subtitle}</p>
                 <CardDescription className="leading-7 whitespace-pre-wrap">
                   {project.description}
                 </CardDescription>
@@ -343,11 +316,7 @@ function Writing({ posts }: { posts: HomePost[] }) {
       className="mx-auto grid max-w-6xl gap-10 px-4 py-16 md:px-6 md:py-20 lg:grid-cols-[0.7fr_1.3fr]"
     >
       <div>
-        <SectionHeading
-          eyebrow="RECENT BLOGS"
-          title="近期博客"
-          description="学习笔记与随笔"
-        />
+        <SectionHeading eyebrow="RECENT BLOGS" title="近期博客" description="学习笔记与随笔" />
       </div>
 
       <div data-reveal className="flex flex-col border-t">
@@ -357,10 +326,7 @@ function Writing({ posts }: { posts: HomePost[] }) {
             href={`/blog/${post.slug}`}
             className="group grid gap-3 border-b py-4 transition-colors hover:bg-muted/50 sm:grid-cols-[7rem_1fr_auto] sm:items-center sm:px-3"
           >
-            <time
-              dateTime={post.date}
-              className="font-mono text-sm text-muted-foreground"
-            >
+            <time dateTime={post.date} className="font-mono text-sm text-muted-foreground">
               {post.date}
             </time>
             <div className="min-w-0">
@@ -373,10 +339,10 @@ function Writing({ posts }: { posts: HomePost[] }) {
           </a>
         ))}
         <Button variant="ghost" className="mt-4 min-h-11 self-start" asChild>
-          <a href="/blog">
+          <Link href="/blog">
             查看全部博客
             <ArrowRightIcon data-icon="inline-end" />
-          </a>
+          </Link>
         </Button>
       </div>
     </section>
@@ -394,12 +360,8 @@ function SectionHeading({
 }) {
   return (
     <div data-reveal className="flex max-w-xl flex-col gap-3">
-      <p className="font-mono text-xs tracking-[0.2em] text-muted-foreground">
-        {eyebrow}
-      </p>
-      <h2 className="font-heading text-3xl font-semibold tracking-tight md:text-4xl">
-        {title}
-      </h2>
+      <p className="font-mono text-xs tracking-[0.2em] text-muted-foreground">{eyebrow}</p>
+      <h2 className="font-heading text-3xl font-semibold tracking-tight md:text-4xl">{title}</h2>
       <p className="text-lg leading-8 text-muted-foreground">{description}</p>
     </div>
   );
@@ -411,17 +373,11 @@ function Footer() {
       <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-8 text-base text-muted-foreground sm:flex-row sm:items-center sm:justify-between md:px-6">
         <span>
           © {new Date().getFullYear()}{" "}
-          <a
-            href={`https://github.com/kurrna`}
-            className="transition-colors hover:text-foreground"
-          >
+          <a href={`https://github.com/kurrna`} className="transition-colors hover:text-foreground">
             {profile.name}
           </a>
         </span>
-        <a
-          href={`mailto:${profile.email}`}
-          className="transition-colors hover:text-foreground"
-        >
+        <a href={`mailto:${profile.email}`} className="transition-colors hover:text-foreground">
           {profile.email}
         </a>
       </div>

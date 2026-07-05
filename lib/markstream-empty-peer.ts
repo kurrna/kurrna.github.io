@@ -1,1 +1,3 @@
-export default {};
+const emptyPeer = {};
+
+export default emptyPeer;

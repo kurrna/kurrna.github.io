@@ -26,10 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="zh-CN"
-      className={`${jetbrainsMono.variable} ${notoSansSC.variable} scroll-smooth`}
-    >
+    <html lang="zh-CN" className={`${jetbrainsMono.variable} ${notoSansSC.variable} scroll-smooth`}>
       <body>
         <a
           href="#main-content"

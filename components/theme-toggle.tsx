@@ -1,12 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 import { MoonIcon, SunIcon } from "@phosphor-icons/react";
 
 import { Button } from "@/components/ui/button";
 
 export function ThemeToggle() {
-  const [isDark, setIsDark] = useState(false);
+  const isDark = useSyncExternalStore(
+    (onStoreChange) => {
+      const observer = new MutationObserver(onStoreChange);
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["class"],
+      });
+
+      return () => observer.disconnect();
+    },
+    () => document.documentElement.classList.contains("dark"),
+    () => false,
+  );
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
@@ -15,14 +27,12 @@ export function ThemeToggle() {
       (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches);
 
     document.documentElement.classList.toggle("dark", shouldUseDark);
-    setIsDark(shouldUseDark);
   }, []);
 
   function toggleTheme() {
     const nextIsDark = !isDark;
     document.documentElement.classList.toggle("dark", nextIsDark);
     localStorage.setItem("theme", nextIsDark ? "dark" : "light");
-    setIsDark(nextIsDark);
   }
 
   return (
