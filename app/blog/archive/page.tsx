@@ -3,13 +3,7 @@ import { ArchiveIcon } from "@phosphor-icons/react/dist/ssr";
 
 import { BlogNav } from "@/components/blog-nav";
 import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { getPosts } from "@/lib/posts";
 
 export const metadata = {

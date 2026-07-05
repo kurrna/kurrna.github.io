@@ -6,6 +6,8 @@ export type BlogPost = {
   title: string;
   description: string;
   date: string;
+  lastUpdate: string;
+  tags: string[];
   category: string;
   filePath: string;
 };
@@ -33,10 +35,15 @@ async function readPostMeta(file: string): Promise<BlogPost> {
   const meta = parseFrontmatter(content);
   const body = stripFrontmatter(content);
   const lines = body.split(/\r?\n/).map((line) => line.trim());
-  const title = meta.title || lines.find((line) => line.startsWith("# "))?.replace(/^#\s+/, "") || path.basename(file, ".md");
+  const title =
+    meta.title ||
+    lines.find((line) => line.startsWith("# "))?.replace(/^#\s+/, "") ||
+    path.basename(file, ".md");
   const description =
     meta.description ||
-    lines.find((line) => line && !line.startsWith("#") && !line.startsWith("|") && !line.startsWith("-")) ||
+    lines.find(
+      (line) => line && !line.startsWith("#") && !line.startsWith("|") && !line.startsWith("-"),
+    ) ||
     "Markdown 博客";
   const slug = path.basename(file, ".md").toLowerCase().replace(/\s+/g, "-");
 
@@ -45,6 +52,8 @@ async function readPostMeta(file: string): Promise<BlogPost> {
     title,
     description,
     date: meta.date || "2026-01-01",
+    lastUpdate: meta.last_update || meta.date || "2026-01-01",
+    tags: parseTags(meta.tags),
     category: meta.category || "学习笔记",
     filePath,
   };
@@ -59,8 +68,16 @@ function parseFrontmatter(content: string) {
     match[1].split(/\r?\n/).map((line) => {
       const [key, ...rest] = line.split(":");
       return [key.trim(), rest.join(":").trim()];
-    })
+    }),
   );
+}
+
+function parseTags(value = "") {
+  return value
+    .replace(/^\[|\]$/g, "")
+    .split(",")
+    .map((tag) => tag.trim().replace(/^['"]|['"]$/g, ""))
+    .filter(Boolean);
 }
 
 function stripFrontmatter(content: string) {

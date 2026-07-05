@@ -9,14 +9,7 @@ import {
 import { BlogNav } from "@/components/blog-nav";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { getPosts } from "@/lib/posts";
 
 export const metadata = {
@@ -64,25 +57,39 @@ export default async function BlogPage() {
 
         <section className="flex flex-col gap-4" aria-label="文章列表">
           {posts.map((post) => (
-            <Card key={post.slug} className="rounded-md shadow-none transition-colors hover:bg-accent">
+            <Card
+              key={post.slug}
+              className="rounded-md shadow-none transition-colors hover:bg-accent"
+            >
               <CardHeader>
-                <CardTitle asChild className="text-2xl">
-                  <h2>{post.title}</h2>
-                </CardTitle>
-                <CardDescription>{post.description}</CardDescription>
-                <CardAction className="flex gap-2">
+                <div className="mb-3 flex flex-wrap items-center gap-2">
                   <Badge variant="outline">{post.category}</Badge>
                   <Badge variant="secondary" asChild>
                     <time dateTime={post.date}>{post.date}</time>
                   </Badge>
-                </CardAction>
+                  {post.lastUpdate !== post.date ? (
+                    <span className="text-sm text-muted-foreground">
+                      更新于 <time dateTime={post.lastUpdate}>{post.lastUpdate}</time>
+                    </span>
+                  ) : null}
+                </div>
+                <CardTitle asChild className="text-2xl">
+                  <h2>{post.title}</h2>
+                </CardTitle>
+                <CardDescription>{post.description}</CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="flex flex-col gap-4">
+                {post.tags.length ? (
+                  <div className="flex flex-wrap gap-2" aria-label="文章标签">
+                    {post.tags.map((tag) => (
+                      <Badge key={tag} variant="secondary">
+                        #{tag}
+                      </Badge>
+                    ))}
+                  </div>
+                ) : null}
                 <Button variant="ghost" className="min-h-11" asChild>
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    aria-label={`阅读《${post.title}》全文`}
-                  >
+                  <Link href={`/blog/${post.slug}`} aria-label={`阅读《${post.title}》全文`}>
                     阅读全文
                     <ArrowRightIcon data-icon="inline-end" />
                   </Link>

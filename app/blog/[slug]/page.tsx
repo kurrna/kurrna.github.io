@@ -13,11 +13,7 @@ export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const posts = await getPosts();
   const post = posts.find((item) => item.slug === slug);
@@ -28,11 +24,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function BlogPostPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const posts = await getPosts();
   const post = posts.find((item) => item.slug === slug);
@@ -71,9 +63,17 @@ export default async function BlogPostPage({
             >
               {post.title}
             </h1>
-            <p className="mt-3 text-lg leading-8 text-muted-foreground">
-              {post.description}
-            </p>
+            <p className="mt-3 text-lg leading-8 text-muted-foreground">{post.description}</p>
+            <div className="mt-4 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+              <span>
+                最后更新： <time dateTime={post.lastUpdate}>{post.lastUpdate}</time>
+              </span>
+              {post.tags.map((tag) => (
+                <Badge key={tag} variant="secondary" asChild>
+                  <Link href="/blog/tag">#{tag}</Link>
+                </Badge>
+              ))}
+            </div>
           </header>
           <MarkdownRender
             content={content}
