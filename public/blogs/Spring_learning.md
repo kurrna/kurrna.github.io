@@ -2,12 +2,21 @@
 title: Spring Learning
 description: Spring 框架学习的一些笔记，待整理。
 date: 2026-04-27
+last_update: 2026-04-27
+tags: [Spring, Java]
 category: 学习笔记
 ---
 
 # Spring-Framework
 
-## IoC容器
+### Spring 的核心特性
+
+- **IoC 容器**：通过控制反转容器实例化对象，让容器来管理对象的生命周期与依赖。
+- **AOP**：面向切面编程。如果被代理对象实现了接口，Spring AOP 默认会使用 JDK Proxy 创建代理对象；如果没有实现接口，则会使用 CGLIB 生成被代理对象的子类作为代理。
+- **事务管理**：提供一致的事务管理接口，支持声明式（`@Transactional`）和编程式事务（`TransactionTemplate`或者`PlatformTransactionManager`）
+- **MVC 框架**：基于 Servlet API 构建的 Web 框架，采用“模型-视图-控制器”的 MVC 架构
+
+### IoC容器
 
 Inversion of Control，控制反转，使得程序的控制权由程序转移到了 IoC 容器，所有组件不再由程序自己创建和配置，而是由容器负责，并管理组件的生命周期
 
@@ -19,13 +28,14 @@ Inversion of Control，控制反转，使得程序的控制权由程序转移到
 
 - Spring 支持的4种依赖注入模式：
 
-  1. 构造方法注入，例如：
+  1. 构造方法注入，保证对象初始化时依赖就绪
 
     ```java
     @Component
     public class Hello {
         JdbcTemplate jdbcTemplate;
-            public Hello(@Autowired JdbcTemplate jdbcTemplate) {
+        // @Autowired 可以省去
+        public Hello(@Autowired JdbcTemplate jdbcTemplate) {
             this.jdbcTemplate = jdbcTemplate;
         }
     }
@@ -43,7 +53,7 @@ Inversion of Control，控制反转，使得程序的控制权由程序转移到
     }
     ```
 
-  3. Setter方法注入，例如：
+  3. Setter方法注入，灵活性高
 
     ```java
     @Component
@@ -57,7 +67,7 @@ Inversion of Control，控制反转，使得程序的控制权由程序转移到
     }
     ```
 
-  4. 字段注入，例如：
+  4. 字段注入，简洁但是隐藏依赖关系，不推荐生产代码
 
     ```java
     @Component
@@ -172,8 +182,8 @@ Inversion of Control，控制反转，使得程序的控制权由程序转移到
   - 销毁过程
     - 执行销毁方法
       - `@PreDestroy` 注解。
-      - 实现`DisposableBean` 接口的 `destroy` 方法。
-      - 在配置中指定 `destroy-method`。
+      - 若实现了实现`DisposableBean` 接口，调用其 `destroy` 方法。
+      - 调用在配置中指定的 `destroy-method`。
     - 容器关闭时 Bean 被销毁
   
 - BeanPostProcessor：一种特殊的 bean，作用是根据条件替换某些 bean，如把原始 Bean 替换为代理后的 Bean ，原来的 Bean 替换后不再受 IoC 容器管理
@@ -183,3 +193,66 @@ Inversion of Control，控制反转，使得程序的控制权由程序转移到
   
 - 在 Spring 中，BeanPostProcessor 的优先度似乎是最高的，但是在 Tsuki 中，按照的是 @Component（包括@Component构造函数中的依赖）-> BeanPostProcessor -> @Component 来加载的
 - - -
+
+### AOP
+
+#### 相关概念
+
+- **Aspect**：切面，是 Join point，Advice，Pointcut 的统称
+- **Join point**：连接点，如方法调用、异常处理等
+- **Advice**：通知，即定义的一个切面中的横切逻辑，包含 `before`、`after`、`after-returning`、`after-throwing`、`around` 五种类型。在很多的 AOP 实现框架中，Advice 通常作为一个拦截器，也可以包含许多个拦截器作为一条链路围绕着 Join point 进行处理。
+- **Pointcut**：切点
+- **Introduction**：引介，让一个切面可以声明被通知的对象实现任何他们没有真正实现的额外的接口。例如可以让一个代理对象代理两个目标类。
+- **Weaving**：织入，在有了连接点、切点、通知以及切面，如何将它们应用到程序中呢？没错，就是织入，在切点的引导下，将通知逻辑插入到目标方法上，使得我们的通知逻辑在方法调用时得以执行。
+- **AOP proxy**：AOP 代理，指在 AOP 实现框架中实现切面协议的对象。在 Spring AOP 中有两种代理，分别是 JDK 动态代理和 CGLIB 动态代理。
+- **Target object**：目标对象，就是被代理的对象。
+
+AOP 常见应用：将与业务无关却为业务模块共同调用的逻辑和责任封装起来，减少重复代码，降低模块耦合度
+
+1. **事务管理**：如声明式事务 @Transactional
+2. **日志记录**：通过`@Before`获取入参，`@AfterReturning`获取返回值，`@Around`统计执行时间
+3. **权限校验**：鉴权
+
+#### 常用注解
+
+- @Aspect：用于定义切面，标注在切面类上。
+- @Pointcut：定义切点，标注在方法上，用于指定连接点。
+- @Before：在方法执行之前执行通知。
+- @After：在方法执行之后执行通知（无论方法正常返回还是抛出异常）。
+- @Around：在方法执行前后都执行通知，是功能最强的一种。
+- @AfterReturning：在方法正常返回结果后执行通知。
+- @AfterThrowing：在方法抛出异常后执行通知。
+
+#### Spring 中 AOP 的实现
+
+> 自 Spring Boot 2.0 起，默认配置 `spring.aop.proxy-target-class=true`，即无论是否实现接口都优先使用 CGLIB，如需切回 JDK 动态代理需手动设为 false。
+
+基于动态代理：
+
+- **基于接口的代理**（JDK动态代理）： 这种类型的代理要求目标对象必须实现至少一个接口（因为代理类必须要继承 Proxy 类，因此只能实现目标对象的全部接口，并且构造器必须传入 InvocationHandler）。Java动态代理会创建一个实现了相同接口的代理类，然后在运行时动态生成该类的实例。这种代理的实现核心是`java.lang.reflect.Proxy`类和`java.lang.reflect.InvocationHandler`接口。每一个动态代理类都必须实现`InvocationHandler`接口，并且每个代理类的实例都关联到一个`handler`。当通过代理对象调用一个方法时，这个方法的调用会被转发为由`InvocationHandler`接口的`invoke()`方法来进行调用。
+
+- **基于类的代理**（CGLIB动态代理）： CGLIB（Code Generation  Library）在运行时动态生成一个目标类的子类。CGLIB代理不需要目标类实现接口，而是通过继承的方式创建代理类。因此，如果目标对象没有实现任何接口，可以使用CGLIB来创建动态代理。
+
+  
+
+### Spring 框架中用到的设计模式
+
+- **工厂设计模式** : Spring使用工厂模式通过 BeanFactory、ApplicationContext 创建 bean 对象。
+- **代理设计模式** : Spring AOP 功能的实现。
+- **单例设计模式** : Spring 中的 Bean 默认都是单例的。
+- **模板方法模式** : Spring 中 jdbcTemplate、hibernateTemplate 等以 Template 结尾的对数据库操作的类，它们就使用到了模板模式。
+- **包装器设计模式** : 我们的项目需要连接多个数据库，而且不同的客户在每次访问中根据需要会去访问不同的数据库。这种模式让我们可以根据客户的需求能够动态切换不同的数据源。
+- **观察者模式:** Spring 事件驱动模型 ApplicationEvent 是观察者模式很经典的一个应用。
+- **适配器模式** :Spring AOP 的增强或通知(Advice)使用到了适配器模式、spring MVC 中也是用到了适配器模式适配Controller。
+
+### SpringBoot用到哪些设计模式？
+
+- **代理模式**：Spring 的 AOP 通过动态代理实现方法级别的切面增强，有静态和动态两种代理方式，采用动态代理方式。
+- **策略模式**：Spring AOP 支持 JDK 和 Cglib 两种动态代理实现方式，通过策略接口和不同策略类，运行时动态选择，其创建一般通过工厂方法实现。
+- **装饰器模式**：Spring 用 TransactionAwareCacheDecorator 解决缓存与数据库事务问题增加对事务的支持。
+- **单例模式**：Spring Bean 默认是单例模式，通过单例注册表（如 HashMap）实现。
+- **简单工厂模式**：Spring 中的 BeanFactory 是简单工厂模式的体现，通过工厂类方法获取 Bean 实例。
+- **工厂方法模式**：Spring中的 FactoryBean 体现工厂方法模式，为不同产品提供不同工厂。
+- **观察者模式**：Spring 观察者模式包含 Event 事件、Listener 监听者、Publisher 发送者，通过定义事件、监听器和发送者实现，观察者注册在  ApplicationContext 中，消息发送由 ApplicationEventMulticaster 完成。
+- **模板模式**：Spring Bean 的创建过程涉及模板模式，体现扩展性，类似 Callback 回调实现方式。
+- **适配器模式**：Spring MVC 中针对不同方式定义的 Controller，利用适配器模式统一函数定义，定义了统一接口 HandlerAdapter 及对应适配器类。
