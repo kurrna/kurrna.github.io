@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import MarkdownRender from "markstream-react/next";
+import MarkdownRenderClient from "@/components/markdown-render-client";
 
 import { BlogNav } from "@/components/blog-nav";
 import { Badge } from "@/components/ui/badge";
@@ -75,14 +75,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               ))}
             </div>
           </header>
-          <MarkdownRender
-            content={content}
-            final
-            fade={false}
-            batchRendering={false}
-            deferNodesUntilVisible={false}
-            maxLiveNodes={0}
-          />
+          <MarkdownRenderClient content={content} />
         </article>
       </main>
     </div>
