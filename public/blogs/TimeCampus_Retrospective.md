@@ -1,6 +1,6 @@
 ---
-title: TimeCampus 技术架构复盘
-description: 简要复盘 TimeCampus 的业务边界、后端架构、Portal、Agent 接入、RAG 基础设施与部署取舍。
+title: TimeCampus 项目总结
+description: 
 date: 2026-07-05
 last_update: 2026-07-08
 tags: [软件工程]
@@ -11,7 +11,7 @@ category: 项目复盘
 
 TimeCampus（时光航迹）是一个面向校园历史影像展示、游客导览和内容运营的系统。它以校园 POI 为空间索引，以年份和影像资料为时间线索，将官方历史影像、用户投稿、评论和地点资料组织为可浏览、可检索、可审核的数据。
 
-项目从“校园时光机地图”的 MVP 开始，Alpha 阶段形成 Spring Boot 后端、MySQL、管理端和小程序方案。由于公开访问、地图展示和管理工作台需要更稳定的 Web 入口，后续补充 React Portal，并在 Beta 后期接入 Spring AI MCP 与纯 Python Agent。当前项目仍是持续迭代状态。
+项目从“校园时光机地图”的 MVP 开始，Alpha 阶段形成 Spring Boot 后端、MySQL、管理端和小程序方案。由于公开访问、地图展示和管理工作台需要更稳定的 Web 入口，后续补充 React Portal，并在 Beta 后期接入 Spring AI MCP 与 Python Agent。
 
 ## 系统边界
 
@@ -34,9 +34,7 @@ flowchart LR
 	Agent --- RAG
 ```
 
-系统没有让 Agent 直接访问数据库。Spring Boot 仍然是业务事实源和权限中心，负责 POI、媒体、评论、审核、文件访问、路线代理和管理员鉴权。Python Agent 只通过 Backend 代理和 MCP 工具调用已有业务能力。
-
-这条边界的核心原因是：数据库写入、权限、审核状态、文件访问和地图路线都必须是确定性业务逻辑；LLM 只适合做检索、归纳、任务拆解和候选动作生成。
+系统没有让 Agent 直接访问数据库。Spring Boot 封装业务逻辑与数据持久化，负责 POI、媒体、评论、审核、文件访问、路线代理和管理员鉴权。Python Agent 只通过 Backend 代理和 MCP 工具调用已有业务能力。数据库写入、权限、审核状态、文件访问和地图路线都必须是确定性业务逻辑；LLM 只适合做检索、归纳、任务拆解和候选动作生成。
 
 ## 后端与数据选型
 
@@ -77,6 +75,6 @@ Agent、RAG、Embedding、MCP、HITL、Eval 的详细设计见 [TimeCampus-Agent
 - RAG 没有进行 Rerank
 - UI/UX 有很大问题
 - Redis、Agent Token、MCP Token、地图 Key 等配置复杂，需要持续做一致性校验。
-- 单机部署，带宽超低
+- 单机部署，网络带宽低
 
 项目地址：[GitHub](https://github.com/BUAA2026SE-404NotFound/TimeCampus) / [在线站点](https://www.timecampus.asia)

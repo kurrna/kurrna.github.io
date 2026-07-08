@@ -2,6 +2,8 @@
 title: Design Document of a simple SysY Compiler
 description: 2025北航编译技术课设
 date: 2026-01-05
+last_update: 2026-01-05
+tags: [课设]
 category: 学习笔记
 ---
 

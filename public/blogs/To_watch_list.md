@@ -2,6 +2,8 @@
 title: To Watch List
 description: 待看的电影和剧🎞️🍿
 date: 2026-07-05
+last_update: 2026-07-05
+tags: [Movie, Anime, Series]
 category: 随笔
 ---
 

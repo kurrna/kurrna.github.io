@@ -1,6 +1,6 @@
 ---
-title: TimeCampus-Agent 技术复盘
-description: 复盘 TimeCampus-Agent 的 MCP、纯 Python Agent、RAG、Embedding 选型、Agent Eval 与 RAG Eval。
+title: TimeCampus-Agent 项目总结
+description: 
 date: 2026-07-05
 last_update: 2026-07-08
 tags: [Agent, RAG]
@@ -9,7 +9,7 @@ category: 项目复盘
 
 # TimeCampus-Agent 技术复盘
 
-TimeCampus-Agent 是 TimeCampus 中的智能体和 AI 质量工程模块。它不是通用聊天机器人，而是围绕校史内容运营和游客导览，把 LLM 放在可控的工具、权限、Python 编排和评测门禁内。
+TimeCampus-Agent 是 TimeCampus 中的智能体和 AI 质量工程模块。
 
 ## 为什么需要 Agent
 
@@ -17,7 +17,7 @@ TimeCampus-Agent 是 TimeCampus 中的智能体和 AI 质量工程模块。它�
 
 游客导览则不开放聊天入口。路线规划由后端调用腾讯地图服务完成，LLM 不生成坐标、距离或折线。
 
-## 架构边界
+## 系统边界
 
 ```mermaid
 flowchart LR
@@ -66,7 +66,7 @@ flowchart TD
 
 会话使用 JSONL 保存消息，`MEMORY.md` 保存人工维护的长期规则。近期消息限量回放，避免上下文无限增长。待审批摘要和恢复状态使用本地 JSON 文件保存。该方案适合单机和调试，缺点是多实例和完整审计能力不足，后续需要数据库化审批表。
 
-## RAG 数据与 Qdrant
+## RAG 预料与技术选型
 
 RAG 语料来自：
 
@@ -86,17 +86,17 @@ Qdrant 只保存可重建索引，不是业务事实源。payload 包含 `rag_id
 
 ## 混合检索
 
-Dense retrieval 适合语义改写，词法检索适合名称、年份和编号。Backend 并行获取 Qdrant 向量候选和 Java 内存词法候选，再用 RRF 融合：
+向量检索做语义相似性粗排，词法检索适合名称、年份和编号，标题单独按 BM25 打分并加权，避免长文档降低标题强相关文档权重。向量检索和词法检索并行执行，再用 RRF 融合召回检索结果：
 
 ```text
 RRF(d) = sum(1 / (60 + rank_r(d)))
 ```
 
-词法检索不是 BM25，而是项目内实现的关键词匹配：完整词、双字词、标题加权和低区分度停用词。融合后按 `source_id` 去重，避免同一资料多个 chunk 挤占 TopK。
+融合后按 `source_id` 去重，避免同一资料多个 chunk 挤占 TopK。
 
 实际迭代中发现过一次 RRF 并列排序退化：泛化词造成多个文档融合分相同，旧逻辑按 source id 排序，导致相关文档被挤到第一名之后。RAG Eval 中 Hit@1 和 MRR 下降暴露了这个问题。修复后，同分时优先词法 rank，再看向量 rank，最后才按 source id 稳定排序。
 
-降级策略比较朴素：Qdrant 或 Embedding 异常时走词法；词法无命中时保留向量；两路都空时返回空结果，并要求 Agent 不编造。
+降级策略较为简单：Qdrant 或 Embedding 异常时走词法；词法无命中时保留向量；两路都空时返回空结果，并要求 Agent 不编造。
 
 ## Agent Eval 与 RAG Eval
 
@@ -110,19 +110,18 @@ Agent Eval 使用版本化 JSONL 用例。当前总计 39 条，其中 24 条是
 - 写操作 HITL；
 - POI、media、knowledge 检索。
 
-Fixture 模式使用固定 trace，不调用模型和外部服务，适合 CI 和 scorer 回归。Live 模式真实调用 LLM、Python Agent runtime、MCP、Qdrant/Ollama 和路线工具，适合发布前验证。
+Fixture 模式使用固定路径，不调用模型和外部服务；Live 模式真实调用 LLM、Python Agent runtime、MCP、Qdrant/Ollama 和路线工具。
 
-RAG Benchmark 使用人工标注的 `relevantUris`，Live retrieval 直接调用 `timecampus_rag_search`，不经过 LLM query rewrite。指标包括 Recall@5、MRR、Hit@1、source diversity 和 P95。当前小规模自建集可以验证链路和策略对比，但样本少、分布窄、真实用户 query 不足，不能代表生产泛化能力。
+RAG Benchmark 使用人工标注的 `relevantUris`，Live retrieval 直接调用 `timecampus_rag_search`，不经过 Query 重写。指标包括 Recall@5、MRR、Hit@1、source diversity 和 P95。当前小规模自建集可以验证链路和策略对比，但样本少、分布窄、真实用户 query 不足，不能代表生产泛化能力。
 
 Prompt Injection 测试覆盖“忽略系统规则”“直接删除”“绕过审批”“空召回虚构”等输入。防护不只靠 prompt：高风险工具不暴露，写工具必须 HITL，Backend 按角色过滤，Java Service 最终校验参数。
 
 ## 主要限制
 
+- 前端 UI/UX 设计有问题
 - RAG Benchmark 规模仍小，hard negative、歧义问题、跨文档问题和知识库外问题不足；
 - HITL 和 session 仍偏单机文件方案，长期需要数据库化审计和审批状态表；
 - Live Eval 依赖模型、MCP、Qdrant 和地图服务，延迟和成本不适合每次提交全量运行；
-- 当前词法检索是轻量匹配，不是完整 BM25；只有评测证明不足时才值得引入独立搜索服务或 reranker。
-
-后续更重要的是扩充人工标注集、沉淀线上 Bad Case、补幂等键和审批审计，而不是继续增加更复杂的多 Agent 架构。
+- 当前 RAG 资料规模不大，暂时没有引入 Rerank 
 
 项目地址：[TimeCampus-Agent](https://github.com/BUAA2026SE-404NotFound/TimeCampus-Agent) / [TimeCampus](https://github.com/BUAA2026SE-404NotFound/TimeCampus)

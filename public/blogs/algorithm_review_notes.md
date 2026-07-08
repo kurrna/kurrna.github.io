@@ -2,6 +2,8 @@
 title: Review Notes of Algorithm
 description: 算法设计复习笔记，分为分治、动态规划、贪心和图算法四个部分。
 date: 2026-01-05
+last_update: 2026-01-05
+tags: [DSA, C++]
 category: 学习笔记
 ---
 
