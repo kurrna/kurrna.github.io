@@ -30,6 +30,12 @@ category: 随笔
 
 - [**星际特工：千星之城 Valérian and the City of a Thousand Planets (2017)**](https://movie.douban.com/subject/11502973/)
 
+- [**钛（2021）**](https://movie.douban.com/subject/34820925/)
+
+- [**夜以继日 寝ても覚めても (2018)**](https://movie.douban.com/subject/27037053/)
+
+- [**甘草披萨 Licorice Pizza (2021)**](https://movie.douban.com/subject/34888057/)
+
 - [**杀心慈母 Serial Mom (1994)**](https://movie.douban.com/subject/1394220/)
 
 - [**韦斯·安德森 Wes Anderson**](https://movie.douban.com/celebrity/1044872/)
